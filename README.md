@@ -1,6 +1,6 @@
-🎮 Game Rating Classifier
+🎮 Outgame
 
-Проект для классификации overall player rating игр Steam на основе их описаний и характеристик.
+Проект для предсказания overall player rating игр Steam на основе их описаний и характеристик.
 
 ## 📁 Структура проекта
 
@@ -16,11 +16,15 @@ project/
 ├── model/
 │   ├── model.joblib       # Обученная модель Logistic Regression
 │   └── vectorizer.joblib  # TF-IDF векторизатор
-├── notebook/
+├── notebooks/
 │   └── train_model.py     # Скрипт для обучения модели
 ├── prepare_data.py        # Скрипт обработки исходного датасета
 ├── requirements.txt
-├── games_description.csv  # Исходный датасет (нужно добавить)
+├── Dockerfile
+├── .dockerignore
+├── EDA.ipynb              # Анализ датасета
+├── docker-compose.yml
+├── games_description.csv  # Исходный датасет 
 └── README.md
 ```
 
@@ -63,10 +67,18 @@ streamlit run app/streamlit_app.py
 
 Откройте в браузере: http://localhost:8501
 
-## 📊 Дополнительно: Просмотр дашборда модели
+## 📊 Дополнительно: # Docker запуск
 
 ```bash
-streamlit run app/dashboard.py
+docker-compose build
+docker-compose up -d
+```
+## 📊 Дополнительно: # EDA.ipynb
+
+```bash
+pip install jupyterlab
+jupyter lab
+# Или можете в вс коде разницы нет
 ```
 
 Дашборд показывает:
@@ -79,7 +91,7 @@ streamlit run app/dashboard.py
 ## 🎯 Классы для классификации
 
 Модель предсказывает следующие рейтинги:
-* **Very Positive** / **Overwhelmingly Positive**
+* **Very Positive**
 * **Mostly Positive**
 * **Mixed**
 * **Mostly Negative**
