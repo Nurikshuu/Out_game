@@ -5,17 +5,14 @@ import numpy as np
 from datetime import datetime
 import os
 
-# Настройка страницы
 st.set_page_config(
     page_title="🎮 Game Rating Classifier",
     page_icon="🎮",
     layout="wide"
 )
 
-# Загрузка модели и векторизатора
 @st.cache_resource
 def load_model():
-    """Загрузка обученной модели и векторизатора"""
     try:
         model = joblib.load('model/model.joblib')
         vectorizer = joblib.load('model/vectorizer.joblib')
@@ -25,7 +22,6 @@ def load_model():
         return None, None
 
 def predict_rating(text, model, vectorizer):
-    """Предсказание рейтинга для текста"""
     text_tfidf = vectorizer.transform([text])
     prediction = model.predict(text_tfidf)[0]
     probabilities = model.predict_proba(text_tfidf)[0]
@@ -44,7 +40,6 @@ def predict_rating(text, model, vectorizer):
     return predicted_rating, confidence, probabilities
 
 def log_prediction(game_title, comment, predicted_rating, confidence):
-    """Логирование предсказаний"""
     os.makedirs('logs', exist_ok=True)
 
     log_data = {
@@ -100,7 +95,6 @@ def main():
                     st.subheader("🎯 Результат")
 
                     color_mapping = {
-                        'Overwhelmingly Positive': 'blue',
                         'Very Positive': 'green',
                         'Mostly Positive': 'lightgreen',
                         'Mixed': 'orange',
@@ -122,7 +116,7 @@ def main():
                     st.subheader("📊 Распределение вероятностей")
 
                     rating_names = ['Very Negative', 'Mostly Negative', 'Mixed',
-                                    'Mostly Positive', 'Very Positive', 'Overwhelmingly Positive']
+                                    'Mostly Positive', 'Very Positive']
 
                     prob_df = pd.DataFrame({
                         'Рейтинг': rating_names,
@@ -133,7 +127,6 @@ def main():
             else:
                 st.warning("Пожалуйста, введите описание игры!")
 
-    # Секция статистики логов
     st.markdown("---")
     st.subheader("📊 Статистика логов")
 
