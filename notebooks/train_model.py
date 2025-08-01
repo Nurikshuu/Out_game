@@ -60,7 +60,7 @@ def train_model():
     
     # Mapping для читаемых названий классов
     class_names = {0: 'Very Negative', 1: 'Mostly Negative', 2: 'Mixed', 
-                   3: 'Mostly Positive', 4: 'Very Positive', 5: 'Overwhelmingly Positive' }
+                   3: 'Mostly Positive', 4: 'Very Positive'}
     
     # Определяем какие классы реально присутствуют в данных
     unique_classes = sorted(np.unique(np.concatenate([y_test, y_pred])))
