@@ -49,7 +49,7 @@ python prepare_data.py
 **4. Обучите модель**
 
 ```bash
-python notebook/train_model.py
+python notebooks/train_model.py
 ```
 
 **5. Запустите приложение**
